@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'Post',
+    'User',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +89,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'User.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

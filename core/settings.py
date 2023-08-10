@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'User',
     'Post',
+    'Likes',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +107,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 
-AUTH_USER_MODEL='User.User'
+AUTH_USER_MODEL = 'User.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

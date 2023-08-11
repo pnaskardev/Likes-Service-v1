@@ -12,5 +12,5 @@ urlpatterns = [
         'put': 'update',
         'delete': 'destroy'
     })),
-
+    path('like/like-count/<str:pk>', views.get_like_count, name="get like count"),
 ]

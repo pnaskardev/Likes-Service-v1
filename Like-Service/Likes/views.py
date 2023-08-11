@@ -14,6 +14,11 @@ class PostEventViewSet(viewsets.ModelViewSet):
     serializer_class = PostEventSerializer
     permission_classes = [AllowAny]
 
+    def list(self, request, *args, **kwargs):
+        queryset = PostEvent.objects.all()
+        serializer = PostEventSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     def create(self, request, *args, **kwargs):
         post_id = request.data["post_id"]
         created_by_id = request.data["created_by_id"]

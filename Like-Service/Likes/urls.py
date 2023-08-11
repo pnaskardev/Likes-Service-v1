@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('register-post/', views.PostEventViewSet.as_view({
         'post': 'create',
+        'get': 'list'
     }), name="Register PostEvent"),
 
     path('like/', views.post_like, name="post a like"),

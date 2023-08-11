@@ -19,13 +19,17 @@ class LikesViewSet(viewsets.ModelViewSet):
         post_id = pk
 
         like_exists = Like.objects.filter(
-            userId=userId, post_id=post_id).exists()
+            user_id=userId, post_id=post_id).exists()
 
         if (like_exists):
             return Response("ALready liked this post", status=status.HTTP_208_ALREADY_REPORTED)
 
-        like = Like.objects.create(userId=userId, post_id=post_id)
-        serializer = LikeSerializer(like)
+        data = {
+            'user_id': userId,
+            'post_id': post_id
+        }
+
+        serializer = LikeSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -1,8 +1,5 @@
 from django.db import models
 
-from User.models import User
-from Post.models import Post
-
 
 class Like(models.Model):
     # created_by = models.ForeignKey(

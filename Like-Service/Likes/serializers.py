@@ -12,8 +12,6 @@ class LikeEventSerializer(serializers.ModelSerializer):
 
 class PostEventSerializer(serializers.ModelSerializer):
 
-    likes_count = serializers.IntegerField(write_only=True, default=0)
-
     class Meta:
         model = PostEvent
         fields = ['post_id', 'created_by_id', 'likes_count']

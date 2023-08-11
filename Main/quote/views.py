@@ -1,6 +1,6 @@
 from django.http import Http404
-from django.shortcuts import render
 import random
+from rest_framework.decorators import api_view
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -42,6 +42,18 @@ class QuoteViewset(viewsets.ViewSet):
         publish('quote_deleted', pk)
         return Response('Quote deleted')
 
+@api_view(['POST'])
+def post_like(request):
+    user_id=request.data['user_id']
+    quote_id=request.data['quote_id']
+
+    data={
+        'user_id':user_id,
+        'quote_id':quote_id
+    }
+    publish('like_created', data)
+    return Response(data, status=status.HTTP_200_OK)
+
 
 class UserAPIView(APIView):
     def get(self, _):
@@ -59,3 +71,5 @@ class UserDetailAPIView(APIView):
         user = self.get_user(pk)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+

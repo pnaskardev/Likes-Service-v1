@@ -14,8 +14,10 @@ urlpatterns = [
         'delete': 'destroy'
     })),
 
+    path('like/', views.send_like, name="send like"),
+
     path('check-like/', views.check_like, name="Check like status"),
 
-    path('like-count/', views.like_count, name="Check like status"),
+    path('like-count/', views.like_count, name="like count"),
 
 ]

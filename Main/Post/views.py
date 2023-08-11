@@ -62,3 +62,33 @@ def send_like(request):
         return response.Response("Post already liked")
 
     return response.Response(status=res.status_code)
+
+
+@permission_classes([IsAuthenticated])
+def check_like(request):
+    user_id = request.user.id
+    post_id = request.data["post_id"]
+
+    data = {
+        "user_id": user_id,
+        "post_id": post_id
+    }
+
+    res = requests.post(
+        'http://localhost:5000/api/like/check-like-status/', json=data)
+
+    return response.Response(res.data, status=res.status_code)
+
+
+@permission_classes([AllowAny])
+def like_count(request):
+    post_id = request.data["post_id"]
+
+    data = {
+        "post_id": post_id
+    }
+
+    res = requests.post(
+        'http://localhost:5000/api/like/like-count/', json=data)
+
+    return response.Response(res.data, status=res.status_code)

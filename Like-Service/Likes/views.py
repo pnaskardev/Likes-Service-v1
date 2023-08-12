@@ -14,6 +14,11 @@ class PostEventViewSet(viewsets.ModelViewSet):
     serializer_class = PostEventSerializer
     permission_classes = [AllowAny]
 
+    def list(self, request, *args, **kwargs):
+        queryset = PostEvent.objects.all()
+        serializer = PostEventSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     def create(self, request, *args, **kwargs):
         post_id = request.data["post_id"]
         created_by_id = request.data["created_by_id"]
@@ -24,30 +29,39 @@ class PostEventViewSet(viewsets.ModelViewSet):
         Response(status=status.HTTP_201_CREATED)
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def post_like(request):
-    userId = request.data['user_id']
-    post_id = request.data['post_id']
+class LikeEventViewSet(viewsets.ModelViewSet):
+    queryset = LikeEvent.objects.all()
+    serializer_class = LikeEventSerializer
+    permission_classes = [AllowAny]
 
-    like_exists = LikeEvent.objects.filter(
-        user_id=userId, post_id=post_id).exists()
+    def list(self, request, *args, **kwargs):
+        queryset = LikeEvent.objects.all()
+        serializer = LikeEventSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-    if (like_exists):
-        return Response("ALready liked this post", status=status.HTTP_208_ALREADY_REPORTED)
+    def create(self, request, *args, **kwargs):
+        userId = request.data['user_id']
+        post_id = request.data['post_id']
 
-    data = {
-        'user_id': userId,
-        'post_id': post_id
-    }
-    post_event = PostEvent.objects.get(post_id=post_id)
+        like_exists = LikeEvent.objects.filter(
+            user_id=userId, post_id=post_id).exists()
 
-    serializer = LikeEventSerializer(data=data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
-    post_event.likes_count = post_event.likes_count+1
-    post_event.save()
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if (like_exists):
+            return Response("ALready liked this post", status=status.HTTP_208_ALREADY_REPORTED)
+
+        data = {
+            'user_id': userId,
+            'post_id': post_id
+        }
+        post_event = PostEvent.objects.get(post_id=post_id)
+
+        serializer = LikeEventSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        post_event.likes_count = post_event.likes_count+1
+        post_event.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 
 @api_view(['GET'])

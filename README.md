@@ -1,9 +1,10 @@
+
 # Likes-Services-V1
 
 **Likes-Services-V1** is a microservice designed to encapsulate and manage all processing related to Likes within our (hypothetical) system. This microservice provides functionality to store Like events, check if a user has liked a particular content, and retrieve the total number of likes for a content. Additionally, it includes a placeholder implementation to showcase how push notifications would be handled when a user receives 100 likes.
 
 ## Architecture
-![Likes Service Architecture Diagram](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/6e51c912-229b-4dba-9c80-3930891fb8de)
+
 
 ## Tech Stack
 
@@ -15,6 +16,7 @@
 - Placeholder Push Notification Handling: Custom code to simulate  push notifications
 - Version Control: Git
 - Deployment: Docker Compose (for local development) and Kubernetes (for production)
+
 
 
 ## Features
@@ -52,6 +54,13 @@ Install dependencies
 
 
 ## API Reference
+
+#### Superuser Credentials
+
+| username | password     | service name                |
+| :-------- | :------- | :------------------------- |
+| `lenovo` | `test123` | main_service |
+| `lenovo` | `test123` | like_service |
 
 #### Get all Quotes
 
@@ -105,11 +114,9 @@ Install dependencies
 
 ## Screenshots
 
-- Notification to user on **100 Likes** ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/547f8bc5-dd21-48c4-91fa-c6dfa88c75e8)
-- Checking Like status ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/46a65fca-5498-49d5-bc5c-e75a85f14112)
-- Registering like ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/0b3ff0f8-0cdb-496d-ab9d-7fcb332f5a4f)
-- Get Like Count ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/61aa3cff-518c-447b-96c9-eb05a15d4eed)
-- Post a Quote ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/7dd05902-8907-4a4c-9d02-92f9a71fb54d)
+
+
+
 ## Authors
 
 - [@pnaskardev](https://github.com/pnaskardev/)

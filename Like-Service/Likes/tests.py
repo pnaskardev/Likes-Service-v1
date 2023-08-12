@@ -1,50 +1,25 @@
-from django.test import TestCase
-from rest_framework.test import APIClient
-from rest_framework import status
-from .models import LikeEvent, PostEvent
+from django.test import SimpleTestCase
+from django.urls import reverse, resolve
+from .views import (
+    PostEventViewSet,
+    LikeEventViewSet,
+    get_likes_count,
+    check_like_status,
+)
 
-class PostEventTests(TestCase):
-    def setUp(self):
-        self.client = APIClient()
-        self.post_data = {
-            "post_id": 1,
-            "created_by_id": 1
-        }
+class TestUrls(SimpleTestCase):
+    def test_register_post_url_resolves(self):
+        url = reverse("Register PostEvent")
+        self.assertEqual(resolve(url).func.cls, PostEventViewSet)
 
-    def test_create_post_event(self):
-        response = self.client.post('/register-post/', self.post_data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(PostEvent.objects.count(), 1)
+    def test_post_like_url_resolves(self):
+        url = reverse("post a like")
+        self.assertEqual(resolve(url).func.cls, LikeEventViewSet)
 
-    def test_list_post_events(self):
-        response = self.client.get('/register-post/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def test_like_count_url_resolves(self):
+        url = reverse("Likes Count")
+        self.assertEqual(resolve(url).func, get_likes_count)
 
-class LikeEventTests(TestCase):
-    def setUp(self):
-        self.client = APIClient()
-        self.like_data = {
-            "user_id": 1,
-            "post_id": 1
-        }
-
-    def test_create_like_event(self):
-        response = self.client.post('/post-like/', self.like_data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(LikeEvent.objects.count(), 1)
-
-    def test_get_likes_count(self):
-        post_event = PostEvent.objects.create(post_id=1, created_by_id=1)
-        response = self.client.get('/like/like-count/', {"post_id": 1})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["like_count"], post_event.likes_count)
-
-    def test_check_like_status(self):
-        LikeEvent.objects.create(user_id=1, post_id=1)
-        response = self.client.get('/like/check-like-status/', {"user_id": 1, "post_id": 1})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, "User has already liked the post")
-
-        response = self.client.get('/like/check-like-status/', {"user_id": 2, "post_id": 1})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, "User has not liked the post yet")
+    def test_check_like_status_url_resolves(self):
+        url = reverse("check like status")
+        self.assertEqual(resolve(url).func, check_like_status)

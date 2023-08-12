@@ -63,31 +63,6 @@ class LikeEventViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# def post_like(request):
-#     userId = request.data['user_id']
-#     post_id = request.data['post_id']
-
-#     like_exists = LikeEvent.objects.filter(
-#         user_id=userId, post_id=post_id).exists()
-
-#     if (like_exists):
-#         return Response("ALready liked this post", status=status.HTTP_208_ALREADY_REPORTED)
-
-#     data = {
-#         'user_id': userId,
-#         'post_id': post_id
-#     }
-#     post_event = PostEvent.objects.get(post_id=post_id)
-
-#     serializer = LikeEventSerializer(data=data)
-#     serializer.is_valid(raise_exception=True)
-#     serializer.save()
-#     post_event.likes_count = post_event.likes_count+1
-#     post_event.save()
-#     return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

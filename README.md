@@ -110,14 +110,6 @@ Install dependencies
 - Registering like ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/0b3ff0f8-0cdb-496d-ab9d-7fcb332f5a4f)
 - Get Like Count ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/61aa3cff-518c-447b-96c9-eb05a15d4eed)
 - Post a Quote ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/7dd05902-8907-4a4c-9d02-92f9a71fb54d)
-
-
-
-
-
-
-
-
 ## Authors
 
 - [@pnaskardev](https://github.com/pnaskardev/)

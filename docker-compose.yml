@@ -1,10 +1,69 @@
 version: '3.8'
+
 services:
-  backend:
-    build: 
-      context: .
+  # rabbitmq:
+  #   image: rabbitmq:management
+  #   container_name: rabbitmq
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=guest
+  #     - RABBITMQ_DEFAULT_PASS=guest
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   healthcheck:
+  #     test: ["CMD", "rabbitmqctl", "status"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+
+  main_service:
+    build:
+      context: ./Main
       dockerfile: Dockerfile
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    # command: dockerize -wait tcp://rabbitmq:5672 bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: main_service
+    volumes:
+      - ./Main:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - rabbitmq
+    restart: on-failure
+
+  like_service:
+    build:
+      context: ./Like-Service
+      dockerfile: Dockerfile
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
+    # command: dockerize -wait tcp://rabbitmq:5672 bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
+    container_name: like_service
     volumes:
-      - .:/app
+      - ./Like-Service:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    entrypoint: bash -c "python manage.py runserver 0.0.0.0:5000 & python consumer.py"
+    restart: on-failure
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  default:
+    driver: bridge

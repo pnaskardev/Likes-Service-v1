@@ -1,4 +1,4 @@
-# Dockerfile for like_service
+# Dockerfile for main_service
 FROM python:3.11.4
 
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -11,8 +11,8 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
-COPY requirements.txt /app/like_requirements.txt
+COPY requirements.txt /app/main_requirements.txt
 
-RUN pip install --no-cache-dir -r like_requirements.txt
+RUN pip install --no-cache-dir -r main_requirements.txt
 
 COPY . /app/

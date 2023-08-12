@@ -11,8 +11,13 @@ django.setup()
 
 from Likes.models import PostEvent, LikeEvent  # Import after Django setup
 
+# connection = pika.BlockingConnection(pika.ConnectionParameters(
+#     'localhost', heartbeat=600, blocked_connection_timeout=300))
+
+# Dockerized
 connection = pika.BlockingConnection(pika.ConnectionParameters(
-    'localhost', heartbeat=600, blocked_connection_timeout=300))
+    'rabbitmq', heartbeat=600, blocked_connection_timeout=300))
+
 channel = connection.channel()
 channel.queue_declare(queue='likes')
 

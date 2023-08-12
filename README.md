@@ -105,6 +105,16 @@ Install dependencies
 
 ## Screenshots
 
+- Notification to user on **100 Likes** ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/547f8bc5-dd21-48c4-91fa-c6dfa88c75e8)
+- Checking Like status ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/46a65fca-5498-49d5-bc5c-e75a85f14112)
+- Registering like ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/0b3ff0f8-0cdb-496d-ab9d-7fcb332f5a4f)
+- Get Like Count ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/61aa3cff-518c-447b-96c9-eb05a15d4eed)
+- Post a Quote ![image](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/7dd05902-8907-4a4c-9d02-92f9a71fb54d)
+
+
+
+
+
 
 
 

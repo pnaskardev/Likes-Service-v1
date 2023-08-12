@@ -3,7 +3,7 @@
 **Likes-Services-V1** is a microservice designed to encapsulate and manage all processing related to Likes within our (hypothetical) system. This microservice provides functionality to store Like events, check if a user has liked a particular content, and retrieve the total number of likes for a content. Additionally, it includes a placeholder implementation to showcase how push notifications would be handled when a user receives 100 likes.
 
 ## Architecture
-
+![Likes Service Architecture Diagram](https://github.com/pnaskardev/Likes-Service-v1/assets/71266237/6e51c912-229b-4dba-9c80-3930891fb8de)
 
 ## Tech Stack
 
@@ -15,7 +15,6 @@
 - Placeholder Push Notification Handling: Custom code to simulate  push notifications
 - Version Control: Git
 - Deployment: Docker Compose (for local development) and Kubernetes (for production)
-
 
 
 ## Features

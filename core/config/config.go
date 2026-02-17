@@ -9,7 +9,7 @@ import (
 )
 
 type Config struct {
-	Port int `mapstructure:"app_port"`
+	Port string `mapstructure:"app_port"`
 }
 
 var (

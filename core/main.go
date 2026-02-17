@@ -1,23 +1,17 @@
 package main
 
 import (
-	"log"
+	"fmt"
 
-	routes "likes-service/core/routes"
-
-	"github.com/gofiber/fiber/v2"
+	"github.com/pnaskardev/Likes-Service-v1/core/config"
 )
 
 func main() {
-
-	fiberConfig := fiber.Config{
-		AppName: "Likes-Service/Core",
+	cfg, err := config.LoadConfig()
+	if err != nil {
+		panic(err)
 	}
 
-	fiberApp := fiber.New(fiberConfig)
-
-	routes.InitialiseNewRoutes(fiberApp)
-
-	log.Fatal(fiberApp.Listen(":8000"))
+	fmt.Println(cfg.Port)
 
 }

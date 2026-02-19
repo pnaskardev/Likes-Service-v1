@@ -11,6 +11,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/gofiber/fiber/v3/middleware/recover"
+	"github.com/pnaskardev/Likes-Service-v1/core/api/routes"
 	"github.com/pnaskardev/Likes-Service-v1/core/config"
 )
 
@@ -33,11 +34,14 @@ func main() {
 	})
 
 	app.Get("/health", func(c fiber.Ctx) error {
-		return c.Status(200).SendString("WORLD")
+		return c.Status(200).SendString("HELLO WORLD")
 	})
 	app.Get("/", func(c fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})
+
+	apiRouteGroup := app.Group("/api")
+	routes.ApiRouter(apiRouteGroup)
 
 	// Server starts on a go routine
 	go func() {

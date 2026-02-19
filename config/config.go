@@ -9,7 +9,8 @@ import (
 )
 
 type Config struct {
-	Port string `mapstructure:"app_port"`
+	Port  string `mapstructure:"app_port"`
+	Cache string `mapstructure:"app_cache"`
 }
 
 var (

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/gofiber/fiber/v3/middleware/recover"
 	"github.com/pnaskardev/Likes-Service-v1/core/config"
 )
@@ -20,6 +21,7 @@ func main() {
 	}
 	fiberConfig := fiber.Config{AppName: "Likes-Service-V2-CORE", CaseSensitive: true}
 	app := fiber.New(fiberConfig)
+	app.Use(logger.New())
 	app.Use(recover.New())
 
 	app.Use(func(c fiber.Ctx) error {
@@ -30,6 +32,9 @@ func main() {
 		return err
 	})
 
+	app.Get("/health", func(c fiber.Ctx) error {
+		return c.Status(200).SendString("WORLD")
+	})
 	app.Get("/", func(c fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})
